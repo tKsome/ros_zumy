@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from mbedrpc import *
+#from PID import *
 import threading, thread
 import time
 from serial import SerialException
@@ -59,7 +60,7 @@ class Zumy:
            time.sleep(0.01) # update data at 100Hz to not starve the main thread
            try:
               self.rlock.acquire()
-              self.data = self.enc_data.run("").split(',') + self.imu_data.run("").split(',') 
+              self.data = self.enc_data.run("").split(',') + self.imu_data.run("").split(',')
               self.rlock.release()
            except SerialException:
               print "serial exception in update_data!"
@@ -131,8 +132,9 @@ class Zumy:
 
 if __name__ == '__main__':
     z=Zumy()
-    z.cmd(0.3,0.3)
-    time.sleep(0.3)
+  #  z.cmd(0.1,0.1)
+
+    time.sleep(0.1)
     z.cmd(0,0)
     z.reset() 
 

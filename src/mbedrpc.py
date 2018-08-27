@@ -71,7 +71,7 @@ class mbed:
     def __init__(self):
         print("This will work as a demo but no transport mechanism has been selected")
         
-    def rpc(self, name, method, args):
+    def rpc(self, name, method, args):#???
         print("Superclass method not overridden")
 
 #Transport mechanisms, derived from mbed
@@ -89,7 +89,8 @@ class SerialRPC(mbed):
 
     def rpc(self, name, method, args):
         self.ser.write("/" + name + "/" + method + " " + " ".join(args) + "\n")
-        # Wait necessary to prevent incomplete reads, tends to take ~0.0002s to read
+       # print("adc","/" + name + "/" + method + " " + " ".join(args) + "\n")        
+ # Wait necessary to prevent incomplete reads, tends to take ~0.0002s to read
         time.sleep(0.0001)
         rval = self.ser.readline().strip()
         return rval
